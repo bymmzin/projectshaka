@@ -1,0 +1,27 @@
+<!-- public/index.html -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Enviar Bug</title>
+</head>
+<body>
+    <h1>Enviar Bug para WhatsApp</h1>
+    <form id="bugForm">
+        <input type="text" id="numeroAlvo" placeholder="Número alvo" required />
+        <button type="submit">Enviar Bug</button>
+    </form>
+
+    <script>
+        document.getElementById('bugForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const numeroAlvo = document.getElementById('numeroAlvo').value;
+            
+            const response = await fetch(`/api-bug?n=${numeroAlvo}`);
+            const data = await response.json();
+            alert(data.message || data.error);
+        });
+    </script>
+</body>
+</html>
